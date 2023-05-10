@@ -1,0 +1,23 @@
+<svg width="42" height="28" viewBox="0 0 42 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.5 27.3815V4.40421L27.5 1.61849V24.5958L14.5 27.3815Z" fill="#3A3A3A" stroke="white"/>
+<path d="M0.5 24.5958V1.61849L13.5 4.40421V27.3815L7.10476 26.0111L0.5 24.5958Z" fill="#3A3A3A" stroke="white"/>
+<path d="M1.5 23.6022V0.628526L13.5 3.39776V26.3715L7.61243 25.0128L1.5 23.6022Z" fill="#3A3A3A" stroke="white"/>
+<path d="M14.5 26.3715V3.39776L26.5 0.628525V23.6022L14.5 26.3715Z" fill="#3A3A3A" stroke="white"/>
+<line x1="3.10847" y1="2.51191" x2="12.1085" y2="4.51191" stroke="white"/>
+<line x1="3.10847" y1="5.51191" x2="12.1085" y2="7.51191" stroke="white"/>
+<line x1="3.10847" y1="8.51191" x2="12.1085" y2="10.5119" stroke="white"/>
+<line x1="3.10847" y1="11.5119" x2="12.1085" y2="13.5119" stroke="white"/>
+<line x1="3.10847" y1="14.5119" x2="12.1085" y2="16.5119" stroke="white"/>
+<line x1="3.10847" y1="17.5119" x2="12.1085" y2="19.5119" stroke="white"/>
+<line x1="3.10847" y1="20.5119" x2="12.1085" y2="22.5119" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 3)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 6)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 9)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 12)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 15)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 18)" stroke="white"/>
+<line y1="-0.5" x2="9.21954" y2="-0.5" transform="matrix(-0.976187 0.21693 0.21693 0.976187 25 21)" stroke="white"/>
+<circle cx="35.5" cy="7.5" r="6" fill="#3A3A3A" stroke="white"/>
+<circle cx="35.5" cy="7.5" r="4.5" fill="#3A3A3A" stroke="white"/>
+<rect x="34.5" y="13.5" width="2" height="11" fill="#3A3A3A" stroke="white"/>
+</svg>
