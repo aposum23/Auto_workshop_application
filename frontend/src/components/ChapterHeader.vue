@@ -37,4 +37,8 @@ h1 {
   margin-right: 1rem;
   user-select: none;
 }
+
+.chapter-header__button:hover {
+  cursor: pointer;
+}
 </style>

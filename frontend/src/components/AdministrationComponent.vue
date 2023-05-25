@@ -6,7 +6,7 @@
     <div class="administration-chapters">
       <ul>
         <div v-for="chapter in administrationChapters" :key="chapter">
-          <li class="chapter"><p>{{ chapter }}</p></li>
+          <li class="chapter"><p @click="changeChapter(chapter)">{{ chapter.label }}</p></li>
         </div>
       </ul>
     </div>
@@ -20,7 +20,9 @@ export default {
   },
   data(){
     return {
-      administrationChapters: ['Пользователи', 'Роли', 'Компания', 'Отчеты', 'Расширение тарифа', 'Помощь'],
+      administrationChapters: [{label: 'Пользователи', type: 'users'}, {label: 'Роли', type: 'roles'},
+       {label: 'Компания', type: 'company'}, {label: 'Отчеты', type: 'reports'},
+        {label: 'Расширение тарифа', type: 'tariffExtension'}, {label: 'Помощь', type: 'help'}],
       searchValue: 'Поиск',
     }
   },
@@ -33,6 +35,15 @@ export default {
       if (this.searchValue === ''){
         this.searchValue = 'Поиск';
       }
+    },
+
+    changeChapter(chapter){
+      let data = {}
+      
+      data.chapterHeader = chapter.label;
+      data.chapterType = chapter.type;
+
+      this.$emit('change-chapter', data)
     }
   }
 }
@@ -74,5 +85,10 @@ export default {
 
 .chapter:active {
   color: #42A08F;
+}
+
+.chapter:hover {
+  color: #928e8e;
+  cursor: pointer;
 }
 </style>

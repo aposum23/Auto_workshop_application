@@ -122,6 +122,10 @@ export default {
 }
 
 .tool-bar--button:active{
-  background-color: #292929;
+  background-color: #979393;
+}
+.tool-bar--button:hover{
+  background-color: #444444;
+  cursor: pointer;
 }
 </style>

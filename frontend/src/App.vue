@@ -7,12 +7,15 @@
       </div>
       <div class="content__body">
         <ClientsComponent v-if="chapterType === 'clients'"/>
-        <OrdersComponent v-if="chapterType === 'tasks'" />
-        <SuppliersComponent v-if="chapterType === 'suppliers'" />
-        <WorkersComponent v-if="chapterType === 'workers'" />
-        <WarehouseComponent v-if="chapterType === 'warehouse'" />
-        <GuidComponent v-if="chapterType === 'guid'" />
-        <AdministrationComponent v-if="chapterType === 'administration'" />
+        <OrdersComponent v-if="chapterType === 'tasks'"/>
+        <SuppliersComponent v-if="chapterType === 'suppliers'"/>
+        <WorkersComponent v-if="chapterType === 'workers'"/>
+        <WarehouseComponent v-if="chapterType === 'warehouse'"/>
+        <GuidComponent v-if="chapterType === 'guid'"/>
+        <AdministrationComponent @change-chapter="changeChapter" v-if="chapterType === 'administration'"/>
+        <UsersComponent v-if="chapterType === 'users'"/>
+        <RolesComponent v-if="chapterType === 'roles'"/>
+        <ReportsComponent v-if="chapterType === 'reports'"/>
       </div>
     </div>
   </div>
@@ -28,6 +31,9 @@ import WorkersComponent from './components/WorkersComponent.vue';
 import WarehouseComponent from './components/WarehouseComponent.vue';
 import GuidComponent from './components/GuidComponent.vue';
 import AdministrationComponent from './components/AdministrationComponent.vue';
+import UsersComponent from './components/UsersComponent.vue';
+import RolesComponent from './components/RolesComponent.vue';
+import ReportsComponent from './components/ReportsComponent.vue';
 
 export default {
   name: 'App',
@@ -41,6 +47,9 @@ export default {
     WarehouseComponent,
     GuidComponent,
     AdministrationComponent,
+    UsersComponent,
+    RolesComponent,
+    ReportsComponent,
   },
   data(){
     return {
