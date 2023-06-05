@@ -13,9 +13,9 @@
         <WarehouseComponent v-if="chapterType === 'warehouse'"/>
         <GuidComponent v-if="chapterType === 'guid'"/>
         <AdministrationComponent @change-chapter="changeChapter" v-if="chapterType === 'administration'"/>
-        <UsersComponent v-if="chapterType === 'users'"/>
-        <RolesComponent v-if="chapterType === 'roles'"/>
-        <ReportsComponent v-if="chapterType === 'reports'"/>
+        <UsersComponent @change-chapter="changeChapter" v-if="chapterType === 'users'"/>
+        <RolesComponent @change-chapter="changeChapter" v-if="chapterType === 'roles'"/>
+        <ReportsComponent @change-chapter="changeChapter" v-if="chapterType === 'reports'"/>
       </div>
     </div>
   </div>

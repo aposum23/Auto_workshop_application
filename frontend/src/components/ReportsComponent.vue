@@ -1,29 +1,36 @@
 <template>
-  <div class="users-component">
-    <div class="users-component__search">
-      <input class="users-component__search-field input-field" type="text" :value="searchValue" @focusin="clearSearchField" @focusout="findClientByMean">
+  <div class="reports-component">
+    <div class="reports-component__back-arrow" @click="goBack()">
+      <img src="@/assets/backArrow.svg"/>
+      <p>Назад</p>
     </div>
-    <table class="users-component__table table">
+    <div class="table-tool-bar-div">
+      <TableToolBar class="table-tool-bar"/>
+    </div>
+    <table class="reports-component__table table">
       <tr>
-        <th class="users-component__table-cell table-cell">Наименование отчета</th>
-        <th class="users-component__table-cell table-cell">Прикреплен к разделам</th>
+        <th class="reports-component__table-cell table-cell">Наименование отчета</th>
+        <th class="reports-component__table-cell table-cell">Прикреплен к разделам</th>
       </tr>
-      <tr v-for="user in users" :key="user.id">
-        <td class="users-component__table-cell table-cell">{{ user.name }}</td>
-        <td class="users-component__table-cell table-cell">{{ user.attachedChapters }}</td>
+      <tr v-for="report in reports" :key="report.id">
+        <td class="reports-component__table-cell table-cell">{{ report.name }}</td>
+        <td class="reports-component__table-cell table-cell">{{ report.attachedChapters }}</td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
+import TableToolBar from '@/components/TableToolBar.vue';
+
 export default {
-  name: 'UsersComponent',
-  props: {
+  name: 'ReportsComponent',
+  components: {
+    TableToolBar,
   },
   data(){
     return {
-      users: [{id: 1, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
+      reports: [{id: 1, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 2, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 3, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 4, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
@@ -40,21 +47,30 @@ export default {
       if (this.searchValue === ''){
         this.searchValue = 'Поиск';
       }
+    },
+
+    goBack(){
+      let data = {}
+      
+      data.chapterHeader = 'Администрирование';
+      data.chapterType = 'administration';
+
+      this.$emit('change-chapter', data)
     }
   }
 }
 </script>
 
 <style scoped>
-.users-component__table {
+.reports-component__table {
   margin: 3rem auto;
 }
 
-.users-component__table-cell {
+.reports-component__table-cell {
   width: 15rem;
 }
 
-.users-component__search {
+.reports-component__search {
   width: 13rem;
   height: 1.6rem; 
   margin-top: 1rem;
@@ -62,7 +78,26 @@ export default {
   margin-right: 3rem;
 }
 
-.users-component__search-field {
+.reports-component__back-arrow {
+  display: inline-flex;
+}
+
+.reports-component__back-arrow:hover {
+  cursor: pointer;
+}
+
+.reports-component__back-arrow img {
+  width: 2rem;
+  margin: 1rem;
+}
+
+.reports-component__back-arrow p {
+  margin: auto;
+  font-weight: bold;
+  size: 14px;
+}
+
+.reports-component__search-field {
   height: 1.5rem;
   width: 10rem;
   padding: 1px;
@@ -75,5 +110,10 @@ export default {
   background-size: .9rem;
   background-position-y: center;
   outline: none;
+}
+
+.table-tool-bar-div {
+  margin-top: 2rem;
+  text-align: center;
 }
 </style>

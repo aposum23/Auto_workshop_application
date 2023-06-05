@@ -1,7 +1,11 @@
 <template>
   <div class="users-component">
-    <div class="users-component__search">
-      <input class="users-component__search-field input-field" type="text" :value="searchValue" @focusin="clearSearchField" @focusout="findClientByMean">
+    <div class="users-component__back-arrow" @click="goBack()">
+      <img src="@/assets/backArrow.svg"/>
+      <p>Назад</p>
+    </div>
+    <div class="table-tool-bar-div">
+      <TableToolBar class="table-tool-bar"/>
     </div>
     <table class="users-component__table table">
       <tr>
@@ -23,9 +27,12 @@
 </template>
 
 <script>
+import TableToolBar from '@/components/TableToolBar.vue';
+
 export default {
   name: 'UsersComponent',
-  props: {
+  components: {
+    TableToolBar,
   },
   data(){
     return {
@@ -46,6 +53,15 @@ export default {
       if (this.searchValue === ''){
         this.searchValue = 'Поиск';
       }
+    },
+
+    goBack(){
+      let data = {}
+      
+      data.chapterHeader = 'Администрирование';
+      data.chapterType = 'administration';
+
+      this.$emit('change-chapter', data)
     }
   }
 }
@@ -68,6 +84,25 @@ export default {
   margin-right: 3rem;
 }
 
+.users-component__back-arrow {
+  display: inline-flex;
+}
+
+.users-component__back-arrow:hover {
+  cursor: pointer;
+}
+
+.users-component__back-arrow img {
+  width: 2rem;
+  margin: 1rem;
+}
+
+.users-component__back-arrow p {
+  margin: auto;
+  font-weight: bold;
+  size: 14px;
+}
+
 .users-component__search-field {
   height: 1.5rem;
   width: 10rem;
@@ -81,5 +116,10 @@ export default {
   background-size: .9rem;
   background-position-y: center;
   outline: none;
+}
+
+.table-tool-bar-div {
+  margin-top: 2rem;
+  text-align: center;
 }
 </style>

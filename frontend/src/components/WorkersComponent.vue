@@ -1,7 +1,7 @@
 <template>
   <div class="workers-component">
-    <div class="workers-component__search">
-      <input class="workers-component__search-field input-field" type="text" :value="searchValue" @focusin="clearSearchField" @focusout="findClientByMean">
+    <div class="table-tool-bar-div">
+      <TableToolBar class="table-tool-bar"/>
     </div>
     <table class="workers-component__table table">
       <tr>
@@ -21,9 +21,12 @@
 </template>
 
 <script>
+import TableToolBar from '@/components/TableToolBar.vue';
+
 export default {
   name: 'WorkersComponent',
-  props: {
+  components: {
+    TableToolBar,
   },
   data(){
     return {
@@ -79,5 +82,10 @@ export default {
   background-size: .9rem;
   background-position-y: center;
   outline: none; /*убираем стандартную обводку браузера*/ 
+}
+
+.table-tool-bar-div {
+  margin-top: 2rem;
+  text-align: center;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="orders-component">
-    <div class="orders-component__search">
-      <input class="orders-component__search-field input-field" type="text" :value="searchValue" @focusin="clearSearchField" @focusout="findClientByMean">
+    <div class="table-tool-bar-div">
+      <TableToolBar class="table-tool-bar"/>
     </div>
     <table class="orders-component__table table">
       <tr>
@@ -21,9 +21,12 @@
 </template>
 
 <script>
+import TableToolBar from '@/components/TableToolBar.vue';
+
 export default {
   name: 'OrdersComponent',
-  props: {
+  components: {
+    TableToolBar,
   },
   data(){
     return {
@@ -66,18 +69,8 @@ export default {
   margin-right: 3rem;
 }
 
-.orders-component__search-field {
-  height: 1.5rem;
-  width: 10rem;
-  padding: 1px;
-  padding-right: 1.6rem;
-  display: flexbox;
-  flex-wrap: wrap;
-  background-image: url(../assets/Search.svg);   
-  background-repeat: no-repeat; /*Убираем повтор изображения*/   
-  background-position: 10.4rem; /*Позиционируем*/   
-  background-size: .9rem;
-  background-position-y: center;
-  outline: none; /*убираем стандартную обводку браузера*/ 
+.table-tool-bar-div {
+  margin-top: 2rem;
+  text-align: center;
 }
 </style>
