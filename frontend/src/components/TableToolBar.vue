@@ -1,6 +1,6 @@
 <template>
   <div class="table-tool-bar">
-    <img src="@/assets/AddButton.svg" class="add-button"/>
+    <img src="@/assets/AddButton.svg" class="add-button" @click="openAddWindow"/>
     <input class="table-tool-bar__sort-field input-field" type="text" :value="sortValue" @focusin="clearSortField" @focusout="sortByMean">
     <input class="table-tool-bar__filter-field input-field" type="text" :value="filterValue" @focusin="clearFilterField" @focusout="filterByMean">
     <input class="table-tool-bar__search-field input-field" type="text" :value="searchValue" @focusin="clearSearchField" @focusout="findByMean">
@@ -48,6 +48,10 @@ export default {
         this.sortValue = 'Сортировка';
       }
     },
+
+    openAddWindow(){
+      this.$emit('open-add-window');
+    }
   }
 }
 </script>

@@ -1,11 +1,17 @@
 <template>
   <div class="reports-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <ReportsAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="reports-component__back-arrow" @click="goBack()">
       <img src="@/assets/backArrow.svg"/>
       <p>Назад</p>
     </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="reports-component__table table">
       <tr>
@@ -22,11 +28,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import ReportsAdd from '@/components/ReportsAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'ReportsComponent',
   components: {
     TableToolBar,
+    ReportsAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -36,6 +46,9 @@ export default {
       {id: 4, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 5, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'}],
       searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
@@ -56,6 +69,20 @@ export default {
       data.chapterType = 'administration';
 
       this.$emit('change-chapter', data)
+    },
+
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
+    },
+
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }
@@ -115,5 +142,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>
