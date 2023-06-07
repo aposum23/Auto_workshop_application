@@ -1,7 +1,13 @@
 <template>
   <div class="workers-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <WorkersAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="workers-component__table table">
       <tr>
@@ -22,11 +28,16 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import WorkersAdd from '@/components/WorkersAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'WorkersComponent',
   components: {
     TableToolBar,
+    WorkersAdd,
+    PopUpNotif,
+    
   },
   data(){
     return {
@@ -35,18 +46,24 @@ export default {
       {id: 3, name: 'Жмых Жмыхов Жмыхович', speciality: '500', vacationDate: '25.04.2023', admissionDate: '25.04.2023'},
       {id: 4, name: 'Жмых Жмыхов Жмыхович', speciality: '500', vacationDate: '25.04.2023', admissionDate: '25.04.2023'},
       {id: 5, name: 'Жмых Жмыхов Жмыхович', speciality: '500', vacationDate: '25.04.2023', admissionDate: '25.04.2023'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
     },
 
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }
@@ -87,5 +104,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>

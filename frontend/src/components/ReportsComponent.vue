@@ -45,23 +45,12 @@ export default {
       {id: 3, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 4, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'},
       {id: 5, name: 'Какой-то отчет', attachedChapters: 'Заказы, Клиенты'}],
-      searchValue: 'Поиск',
       showAddWindow: false,
       showNotif: false,
       notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
-    },
-
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
-    },
-
     goBack(){
       let data = {}
       

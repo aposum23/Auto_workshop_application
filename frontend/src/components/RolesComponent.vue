@@ -1,11 +1,17 @@
 <template>
   <div class="roles-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <RolesAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="roles-component__back-arrow" @click="goBack()">
       <img src="@/assets/backArrow.svg"/>
       <p>Назад</p>
     </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="roles-component__table table">
       <tr>
@@ -22,11 +28,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import RolesAdd from '@/components/RolesAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'RolesComponent',
   components: {
     TableToolBar,
+    RolesAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -35,20 +45,12 @@ export default {
       {id: 3, name: 'Мастер', description: 'Занимается ремонтом автомобилей'},
       {id: 4, name: 'Мастер', description: 'Занимается ремонтом автомобилей'},
       {id: 5, name: 'Мастер', description: 'Занимается ремонтом автомобилей'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
-    },
-
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
-    },
-
     goBack(){
       let data = {}
       
@@ -56,6 +58,20 @@ export default {
       data.chapterType = 'administration';
 
       this.$emit('change-chapter', data)
+    },
+
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
+    },
+
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }

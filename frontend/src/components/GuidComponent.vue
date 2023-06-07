@@ -1,7 +1,13 @@
 <template>
   <div class="warehose-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <GuidAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="warehose-component__table table">
       <tr>
@@ -18,11 +24,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import GuidAdd from '@/components/GuidAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'GuidComponent',
   components: {
     TableToolBar,
+    GuidAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -32,18 +42,24 @@ export default {
       {id: 4, name: 'Марки машин', count: '16'},
       {id: 5, name: 'Марки машин', count: '16'},
       {id: 6, name: 'Марки машин', count: '16'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
     },
 
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }
@@ -84,5 +100,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>

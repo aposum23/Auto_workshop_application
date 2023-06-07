@@ -1,7 +1,13 @@
 <template>
   <div class="suppliers-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <SuppliersAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="suppliers-component__table table">
       <tr>
@@ -20,11 +26,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import SuppliersAdd from '@/components/SuppliersAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'SuppliersComponent',
   components: {
     TableToolBar,
+    SuppliersAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -33,18 +43,24 @@ export default {
       {id: 3, supplierName: 'Жмых Жмыхов Жмыхович', address: 'Ставрополь, Ленина 51', productionType: '25.04.2023'},
       {id: 4, supplierName: 'Жмых Жмыхов Жмыхович', address: 'Ставрополь, Ленина 51', productionType: '25.04.2023'},
       {id: 5, supplierName: 'Жмых Жмыхов Жмыхович', address: 'Ставрополь, Ленина 51', productionType: '25.04.2023'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
     },
 
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }
@@ -85,5 +101,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>

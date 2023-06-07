@@ -1,7 +1,13 @@
 <template>
   <div class="orders-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <OrdersAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="orders-component__table table">
       <tr>
@@ -22,11 +28,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import OrdersAdd from '@/components/OrdersAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'OrdersComponent',
   components: {
     TableToolBar,
+    OrdersAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -35,19 +45,25 @@ export default {
       {id: 3, clientName: 'Жмых Жмыхов Жмыхович', sum: '500', orderDate: '25.04.2023'},
       {id: 4, clientName: 'Жмых Жмыхов Жмыхович', sum: '500', orderDate: '25.04.2023'},
       {id: 5, clientName: 'Жмых Жмыхов Жмыхович', sum: '500', orderDate: '25.04.2023'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
     },
 
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
-    }
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
+    },
   }
 }
 </script>
@@ -72,5 +88,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>

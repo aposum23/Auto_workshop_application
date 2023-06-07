@@ -1,11 +1,17 @@
 <template>
   <div class="users-component">
+    <div class="notification">
+      <PopUpNotif v-if="showNotif" :textOfNotif="notifMessage" @close-notif="closeNotification"/>
+    </div>
+    <div class="addition-window">
+      <UsersAdd v-if="showAddWindow" @cancel-window="closeAddWindow"/>
+    </div>
     <div class="users-component__back-arrow" @click="goBack()">
       <img src="@/assets/backArrow.svg"/>
       <p>Назад</p>
     </div>
     <div class="table-tool-bar-div">
-      <TableToolBar class="table-tool-bar"/>
+      <TableToolBar class="table-tool-bar" @open-add-window="openAddWindow"/>
     </div>
     <table class="users-component__table table">
       <tr>
@@ -28,11 +34,15 @@
 
 <script>
 import TableToolBar from '@/components/TableToolBar.vue';
+import UsersAdd from '@/components/UsersAdd.vue';
+import PopUpNotif from './PopUpNotif.vue';
 
 export default {
   name: 'UsersComponent',
   components: {
     TableToolBar,
+    UsersAdd,
+    PopUpNotif,
   },
   data(){
     return {
@@ -41,20 +51,12 @@ export default {
       {id: 3, name: 'Жмых Жмыхов Жмыхович', email: 'gmih@mail.ru', phoneNumber: '8(800)555-35-35', role: 'Мастер'},
       {id: 4, name: 'Жмых Жмыхов Жмыхович', email: 'gmih@mail.ru', phoneNumber: '8(800)555-35-35', role: 'Мастер'},
       {id: 5, name: 'Жмых Жмыхов Жмыхович', email: 'gmih@mail.ru', phoneNumber: '8(800)555-35-35', role: 'Мастер'}],
-      searchValue: 'Поиск',
+      showAddWindow: false,
+      showNotif: false,
+      notifMessage: '',
     }
   },
   methods:{
-    clearSearchField(){
-      this.searchValue = '';
-    },
-
-    findClientByMean(){
-      if (this.searchValue === ''){
-        this.searchValue = 'Поиск';
-      }
-    },
-
     goBack(){
       let data = {}
       
@@ -62,6 +64,20 @@ export default {
       data.chapterType = 'administration';
 
       this.$emit('change-chapter', data)
+    },
+
+    openAddWindow(){
+      this.showAddWindow = !this.showAddWindow;
+    },
+
+    closeAddWindow(message){
+      this.showAddWindow = !this.showAddWindow;
+      this.notifMessage = message;
+      this.showNotif = true;
+    },
+
+    closeNotification(){
+      this.showNotif = !this.showNotif;
     }
   }
 }
@@ -121,5 +137,9 @@ export default {
 .table-tool-bar-div {
   margin-top: 2rem;
   text-align: center;
+}
+
+.addition-window {
+  align: center;
 }
 </style>
